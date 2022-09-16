@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,500,500italic,700,700italic" media="all">
+  <script src='https://cdn.jsdelivr.net/npm/webtorrent@latest/webtorrent.min.js'></script>
+  <!-- Primary Meta Tags -->
+  <title>Send Files Now</title>
+  <meta name="title" content="Send Files Now">
+  <meta name="description" content="Peer-to-peer file transfer in your browser">
+  <link rel="stylesheet" href="style.css">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sendfiles.run/">
+  <meta property="og:title" content="Send Files Now">
+  <meta property="og:description" content="Peer-to-peer file transfer in your browser">
+  <meta property="og:image" content="https://sendfiles.run/thumb.png">
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://sendfiles.run/">
+  <meta property="twitter:title" content="Send Files Now">
+  <meta property="twitter:description" content="Peer-to-peer file transfer in your browser">
+  <meta property="twitter:image" content="https://sendfiles.run/thumb.png">
+  <script src='https://bundle.run/prettier-bytes@1.0.4'></script>
+  <script src='https://bundle.run/upload-element@1.0.1'></script>
+  <script src='https://bundle.run/create-torrent@4.7.0'></script>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <div id="text">
+    <div id="column2">
+      <div id="box" class="box">
+        <div id="down">
+          <h1>Send Files Now</h1>
+          <h2>Peer-To-Peer File Transfer. No Size Limit.</h2>
+          <input type="file" name="upload" id="upload" multiple hidden />
+          <label for="upload"><span>Choose files</span></label>
+          <p id="note">* Keep this tab open and active while sending</p>
+        </div>
+        <div id="down-alt" style="display: none">
+          <h1>Get Your Files Now</h1><br><br>
+          <a href="" class="button" target="_blank">Want to send instead?</a><br><br>
+        </div>
+        <div class="extended">
+          <div id="speed"></div>
+          <div id="log"></div>
+        </div>
+      </div>
+      <p id="footer"><a href="https://github.com/Omodaka9375" target="_blank">@Omodaka9375</a></p>
+    </div>
+  </div>
+  <script src="index.js"></script>
+</body>
+</html>
