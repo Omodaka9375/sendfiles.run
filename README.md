@@ -1,23 +1,34 @@
 
 # SendFiles.run
-Simple Peer-To-Peer file transfer in the browser. No server involved. Powered by WebTorrent client.
+Simple Peer-To-Peer file sharing in the browser, written in vanilla javascript.
+
+Powered by *WebTorrent*.
 
 
 ## Demo
 
-(Live demo)[https://sendfiles.run/]
+[sendfiles.run](https://sendfiles.run/)
+
+## Usage
+
+Choose file(s) to share and copy the share link.
+
+*Note*:
+
+Keep the sender tab active until another person downloads the files, because you are actively seeding them as a torrent.
+If you close the tab before others get to receive them, they will not be available anymore.
 
 
 ## Screenshots
 
+Sender example:
+
 ![Sending](send.png)
+
+Receiver example:
 
 ![Receiveing](receive.png)
 
-## Usage
-
-Keep the sender tab active until the other person downloads the files, because you are actively seeding them as a torrent.
-If you close the tab before others get to receive files, they won't be available anymore.
 
 ## License
 
