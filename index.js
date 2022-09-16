@@ -15,76 +15,70 @@ const canvasBody = document.getElementById("canvas"), drawArea = canvasBody.getC
 let delay = 200, tid, rgb = opts.lineColor.match(/\d+/g);
 
 if (window.location.hash) {
-    document.getElementById('down').style.display = 'none'
-    document.getElementById('down-alt').style.display = 'inline-block'
+    document.getElementById('down').style.display = 'none';
+    document.getElementById('down-alt').style.display = 'inline-block';
 }
 
 function copyLink(btn) {
-    navigator.clipboard.writeText(btn.previousElementSibling.innerText)
-    btn.classList.add('copied')
-    setTimeout(() => { btn.classList.remove('copied') }, 1100)
+    navigator.clipboard.writeText(btn.previousElementSibling.innerText);
+    btn.classList.add('copied');
+    setTimeout(() => { btn.classList.remove('copied') }, 1100);
 }
 
 function init() {
-    // Create a WebTorrent client
-    client = new WebTorrent()
-    // Log when a warning or error occurs
-    client.on('warning', logError)
-    client.on('error', logError)
-
-    // Share files via upload input element
-    const upload = document.querySelector('#upload')
+    client = new WebTorrent();
+    client.on('warning', logError);
+    client.on('error', logError);
+    const upload = document.querySelector('#upload');
     uploadElement(upload, (err, results) => {
         if (err) {
             logError(err)
             return
         }
-        const files = results.map(result => result.file)
-        seedFiles(files)
+        const files = results.map(result => result.file);
+        seedFiles(files);
     })
 }
 
 function check() {
-    var autoDownload = window.location.hash.substr(1) ? true : false
+    var autoDownload = window.location.hash.substr(1) ? true : false;
     if (autoDownload) {
-        downloadTorrent(window.location.hash.substr(1))
+        downloadTorrent(window.location.hash.substr(1));
     }
 }
 
 function downloadTorrent(infohash) {
     document.getElementById("down").style.display = "none";
-    const announce = createTorrent.announceList
-    client.add(infohash, { announce }, addTorrent)
-    log(`<p id="downloading">Downloading ...</p>`)
+    const announce = createTorrent.announceList;
+    client.add(infohash, { announce }, addTorrent);
+    log(`<p id="downloading">Downloading ...</p>`);
 }
 
 function seedFiles(files) {
-    // Ignore any drag-and-drop that is not a file (i.e. text)
     if (files.length === 0) return
-    document.getElementById('note').style.visibility = 'visible'
-    client.seed(files, addTorrent)
-    //log(`Seeding new torrent with ${files.length} files!`)
+    document.getElementById('note').style.visibility = 'visible';
+    client.seed(files, addTorrent);
 }
 
 function addTorrent(torrent) {
-    torrent.on('warning', logError)
-    torrent.on('error', logError)
+    torrent.on('warning', logError);
+    torrent.on('error', logError);
 
     const speed = document.querySelector('#speed')
-    speed.style.display = "block"
+    speed.style.display = "block";
     // Show the speed stats immediately
-    updateSpeed(torrent)
+    updateSpeed(torrent);
     // Update the speed stats once per second
     const interval = setInterval(() => {
-        updateSpeed(torrent)
+        updateSpeed(torrent);
     }, 1000)
     // When the torrent is done, update the stats one last time, then stop calling updateSpeed()
     torrent.on('done', () => {
-        updateSpeed(torrent)
-        clearInterval(interval)
+        updateSpeed(torrent);
+        clearInterval(interval);
         document.getElementById('downloading').remove();
     })
-    const torrentIds = torrent.magnetURI.split('&')
+    const torrentIds = torrent.magnetURI.split('&');
     const torId = torrentIds[0].split(':')
     const hash = torId[3]
     let torrentLog = `<div class="torrent-log">
@@ -97,7 +91,7 @@ function addTorrent(torrent) {
               <div class="file-list">
               </div>
           </div>`
-    log(torrentLog)
+    log(torrentLog);
     let fileList = ``
     torrent.files.forEach(file => {
         // Add a download link
@@ -108,21 +102,21 @@ function addTorrent(torrent) {
                 return
             }
             // Create a link element
-            const a = document.createElement('a')
-            a.href = url
-            a.textContent = file.name + ` (${prettierBytes(file.length)})`
+            const a = document.createElement('a');
+            a.href = url;
+            a.textContent = file.name + ` (${prettierBytes(file.length)})`;
             // Download the file with given name when clicked
-            a.download = file.name
+            a.download = file.name;
             // Add the link to the log section
-            let link = `<a href="${url}" download="${file.name}" onclick="this.classList.add('visited')">${file.name} <span class="file-size">${prettierBytes(file.length)}</span></a>`
-            document.getElementsByClassName('file-list')[0].insertAdjacentHTML('beforeEnd', link)
+            let link = `<a href="${url}" download="${file.name}" onclick="this.classList.add('visited')">${file.name} <span class="file-size">${prettierBytes(file.length)}</span></a>`;
+            document.getElementsByClassName('file-list')[0].insertAdjacentHTML('beforeEnd', link);
 
         })
     })
 }
 
 function updateSpeed(torrent) {
-    const progress = (100 * torrent.progress).toFixed(0)
+    const progress = (100 * torrent.progress).toFixed(0);
     const speed = `
           <div class="transfer-info">
               ${window.location.hash ? `<div class="progress"><div id="progressbar" style="width:${progress}%"></div>${progress}%</div>` : ``}
@@ -133,21 +127,19 @@ function updateSpeed(torrent) {
               </div>                
           </div>
       `
-    const speedInfo = document.querySelector('#speed')
-    speedInfo.innerHTML = speed
+    const speedInfo = document.querySelector('#speed');
+    speedInfo.innerHTML = speed;
 }
-
 // Log a string message
 function log(element) {
-    const log = document.querySelector('#log')
-    log.insertAdjacentHTML('afterBegin', element)
+    const log = document.querySelector('#log');
+    log.insertAdjacentHTML('afterBegin', element);
 }
 // Log an error object
 function logError(err) {
     console.log(err.message);
 }
-//background animation
-
+// Background animation bellow
 let resizeReset = function () {
     w = canvasBody.width = window.innerWidth;
     h = canvasBody.height = window.innerHeight;
@@ -238,17 +230,14 @@ function loop() {
     }
 }
 
-
-
 window.addEventListener('load', function () {
-    check()
+    check();
 })
-
-
 
 window.addEventListener("resize", function () {
     deBouncer();
 });
+
 resizeReset();
 setup();
 init()
