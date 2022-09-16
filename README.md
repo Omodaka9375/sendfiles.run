@@ -2,8 +2,6 @@
 # SendFiles.run
 Simple Peer-To-Peer file sharing in the browser, written in vanilla javascript.
 
-Powered by *WebTorrent*.
-
 
 ## Demo
 
@@ -31,6 +29,8 @@ Receiver example:
 
 ![Receiveing](receive.png)
 
+
+Powered by *WebTorrent*
 
 ## License
 
