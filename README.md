@@ -3,7 +3,7 @@
 Simple Peer-To-Peer file sharing in the browser, written in vanilla javascript.
 
 
-## Demo
+## Live Demo
 
 [sendfiles.run](https://sendfiles.run/)
 
