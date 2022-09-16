@@ -13,10 +13,12 @@ Powered by *WebTorrent*.
 
 Choose file(s) to share and copy the share link.
 
-*Note*:
-
 Keep the sender tab active until another person downloads the files, because you are actively seeding them as a torrent.
 If you close the tab before others get to receive them, they will not be available anymore.
+
+**Obligatory warning**:
+
+*Do not click on Sendfiles links from strangers or websites you are not familiar with!!!*
 
 
 ## Screenshots
